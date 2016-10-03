@@ -29,7 +29,7 @@ Once you include the jar in your project in the usual manner, all functionality
 is available through the `com.chartbeat.androidsdk.Tracker` class. You access this
 class's static functions to start and stop the tracker, update it with information
 about application state and so on. You can also set a good deal of optional
-information such as the author and so on.
+information such as the author, etc..
 
 **Tracker Class:**
 The tracker class (`com.chartbeat.androidsdk.Tracker`) is
@@ -58,11 +58,22 @@ as well, and any time the user types, you will want to call `userTyped()`. If yo
 has multiple activities, be sure to do this in each one.
 
 There are also a variety of other methods for setting optional information, such as
-author and section; however the above functions are required. For a complete list, as
-well as detailed usage information about the above functions,
+author and section; however the above functions are required. 
+
+**Setting Sections and Authors**
+In order to set the sections and authors of each view, the `trackView()` function will need to be called first. 
+
+* Sections
+	* To set a specific section for a view, you can call `setSections` and pass in 	a string using a comma as a delimiter 
+		* Note that any commas found in the section strings will be removed because that is the delimiter.
+* Authors
+	* To set a specific author for a view, you can call `setAuthors` and pass in a string using a comma as a delimiter 
+		* Note that any commas found in the section strings will be removed because that is the delimiter.
+
+For a complete list, as well as detailed usage information about the above functions,
 see the Javadocs for `com.chartbeat.androidsdk.Tracker`.
 
-* Debugging: if you wish to see what data is being sent to the server, when and so on,
+**Debugging:** if you wish to see what data is being sent to the server, when and so on,
 in the logs, you can set `com.chartbeat.androidsdk.DEBUG` to `true`. You should set this
 to `true` before your first call to `setupTracker()` but you can set it
 anytime.
@@ -78,46 +89,6 @@ GEOLocation information, simply turn the GPS on yourself and turn it off when yo
 zeroed in on the current location. The Location information is updated whenever
 `trackView()` is called.
 
-
-Compiling and Using
--------------------
-
-You can build an .aar of the library by running:
-
-    $./gradlew clean
-    $./gradlew aR
-
-inside the root directory of the project.
-
-The assembled release .aar will be under:
-
-    ./sdk/build/outputs/aar/
-
-
-Releasing
----------
-
-The library is released on bintray. To cut a release you will need to create a local.properties
-with your android.sdk location and your bintray credentials.
-
-
-    sdk.dir=/Users/rick/Library/Android/sdk/
-    bintray.user=rmangi
-    bintray.apikey=<apikey>
-    bintray.gpg.password=<pass>
-
-Then you can build as above and run
-
-    ./gradlew bintrayUpload
-
-You should also bump the version number in sdk/build.gradle
-
-Code
-----
-
-The `sdk` folder contains all the code for the sdk and is documented using standard JavaDoc.
-The `testapp` folder contains a test application demonstrating the use of the SDK. The `doc`
-folder contains additional documentation.
 
 Maven/Gradle
 ----
